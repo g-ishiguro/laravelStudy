@@ -14,6 +14,11 @@
     @forelse ($post->comments as $comment) 
     <li>
         {{ $comment->body }}
+        <a href="#" class="del" data-id="{{ $comment->id }}">[x]</a>
+        <form action="{{ action('CommentsController@destroy', [$post, $comment]) }}" method="post" id="form_{{ $comment->id }}">
+            {{ csrf_field() }}
+            {{ method_field('delete') }}
+        </form>
     </li>
     @empty
     <li>No comment yet</li>
@@ -32,4 +37,5 @@
     </p>
     <p></p>
 </form>
+<script src="/js/main.js"></script>
 @endsection
